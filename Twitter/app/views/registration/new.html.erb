@@ -1,0 +1,21 @@
+<h2>Sign up</h2>
+
+<%= form_tag(user_registration_path,:method => 'post') %>
+
+
+  <div><label for="user_email">Email</label><br />
+    <input autofocus="autofocus" id="user_email" name="email" size="30" type="email" value="" /></div>
+  <div><label for="user_name">Name</label><br />
+    <input id="user_name" name="name" size="30" type="text" /></div>
+  <div><label for="user_mobile">Mobile</label><br />
+    <input id="user_mobile" name="mobile" size="30" type="text" /></div>
+
+  <div><label for="user_password">Password</label><br />
+    <input id="user_password" name="password" size="30" type="password" /></div>
+
+  <div><label for="user_password_confirmation">Password confirmation</label><br />
+    <input id="user_password_confirmation" name="password_confirmation" size="30" type="password" /></div>
+
+  <div><input name="commit" type="submit" value="Sign up" /></div>
+</form>
+<a href="/users/sign_in">Sign in</a><br />
