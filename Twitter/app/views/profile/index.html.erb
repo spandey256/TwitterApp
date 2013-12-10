@@ -1,0 +1,22 @@
+<h2>Profile Page</h2>
+<div>
+  <table>
+    <tr>
+      <td>Name: </td>
+      <td><%= current_user.name %> </td>
+    </tr>
+    <tr>
+      <td>Email: </td>
+      <td><%= current_user.email %> </td>
+    </tr>
+    <tr>
+      <td>Mobile: </td>
+      <td><%= current_user.mobile %> </td>
+    </tr>
+
+  </table>
+
+</div>
+<div>
+  <%= link_to "Edit", new_profile_path %>
+</div>

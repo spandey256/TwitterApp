@@ -1,14 +1,12 @@
-class RegistrationController < Devise::RegistrationsController
-
-  def new
-  end
-
+class ProfileController < ApplicationController
+  before_filter :authenticate_user!
   def create
-    if params[:name].strip == "" || params[:email].strip == "" || params[:mobile].strip == ""
+    if params[:name].strip==""
+      @status="Please fill the form correctly!"
       render :action => "new"
       return
     end
-    @user = User.new
+    @user = current_user
     @user.name = params[:name]
     @user.email = params[:email]
     @user.mobile = params[:mobile]
@@ -17,12 +15,13 @@ class RegistrationController < Devise::RegistrationsController
     @user.valid?
     if @user.errors.blank?
       @user.save
-      redirect_to new_user_session_path
+      redirect_to profile_index_path
       return
     end
-
+    @status="Please fill the form correctly!"
     render :action => "new"
 
   end
+
 
 end

@@ -8,6 +8,20 @@
 </head>
 <body>
 
+
+
+<% if user_signed_in? %>
+    <h1>Welcome</h1>
+    <div>
+      <a href="<%= home_index_path %>">Home</a>
+      <a href="#">Notifications</a>
+      <a href="#">Connections</a>
+      <span>Welcome</span>
+      <a href="<%= profile_index_path %>"><%= current_user.email %></a>
+      <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+    </div>
+<% end %>
+
 <%= yield %>
 
 </body>

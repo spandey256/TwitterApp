@@ -1,0 +1,37 @@
+<h2>Profile Page</h2>
+<% if @status!=nil %>
+    <div>
+      <p><%= @status %></p>
+
+    </div>
+<% end %>
+<div>
+  <%= form_tag(profile_index_path, method: "post") do %>
+      <%= hidden_field_tag(:email, current_user.email) %>
+      <table>
+    <tr>
+      <td>Name: </td>
+      <td><%= text_field_tag(:name, current_user.name) %> </td>
+    </tr>
+
+    <tr>
+      <td>Mobile: </td>
+      <td><%= text_field_tag(:mobile, current_user.mobile) %> </td>
+    </tr>
+    <tr>
+      <td>Password: </td>
+      <td><%= password_field_tag(:password) %> </td>
+    </tr>
+    <tr>
+      <td>Confirm Password: </td>
+      <td><%= password_field_tag(:password_confirmation) %> </td>
+    </tr>
+    <tr>
+      <td>
+        <%= submit_tag("Submit") %>
+      </td>
+    </tr>
+  </table>
+  <% end %>
+
+</div>

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209090340) do
+ActiveRecord::Schema.define(:version => 20131210072912) do
+
+  create_table "connections", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "following_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "connections", ["follower_id"], :name => "index_connections_on_follower_id"
+  add_index "connections", ["following_id"], :name => "index_connections_on_following_id"
 
   create_table "user_tweets", :force => true do |t|
     t.string   "tweet"
