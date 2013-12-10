@@ -2,6 +2,7 @@ Twitter::Application.routes.draw do
   devise_for :users,:controllers => { :registrations =>'registration'}
   resources :home
   resources :profile
+  resources :connection
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

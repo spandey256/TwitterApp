@@ -1,0 +1,51 @@
+<h3>Following</h3>
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Action</th>
+  </tr>
+  <% @following_list.each do|f| %>
+  <tr>
+    <% user=f.following %>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= form_tag(connection_path(current_user.id), method: "put") do %>
+          <%= hidden_field_tag(:user_id, user.id) %>
+          <%= submit_tag("UnFollow") %>
+      <% end %></td>
+
+  </tr>
+  <% end %>
+</table>
+<div>
+  <%= form_tag(connection_index_path, :method => "post") do %>
+      <%= label_tag(:label, "username: ") %>
+      <%= text_field_tag(:email) %>
+      <%= submit_tag("Add") %>
+  <% end %>
+  <% if flash[:notice]!=nil %>
+    <p><%= flash[:notice] %></p>
+  <% end %>
+</div>
+
+<div>
+  <h3>Followers</h3>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Date</th>
+    </tr>
+    <% @follower_list.each do|f| %>
+        <tr>
+          <% user=f.follower %>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.created_at %></td>
+
+        </tr>
+    <% end %>
+  </table>
+
+</div>
