@@ -3,6 +3,7 @@ Twitter::Application.routes.draw do
   resources :home
   resources :profile
   resources :connection
+  resources :notification
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

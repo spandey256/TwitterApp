@@ -18,6 +18,12 @@ class NotificationController < ApplicationController
         redirect_to connection_index_path
         return
       end
+      c=Connection.find_by_following_id_and_follower_id(user.id, current_user.id)
+      if !c.nil?
+        flash[:notice]="Already Following!"
+        redirect_to connection_index_path
+        return
+      end
       n=Notification.new
       n.to=user
       n.from=current_user

@@ -9,4 +9,9 @@ class RegistrationController < Devise::RegistrationsController
 
   end
 
+  def edit
+    super
+
+  end
+
 end

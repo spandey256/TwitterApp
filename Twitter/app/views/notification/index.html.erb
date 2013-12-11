@@ -1,6 +1,6 @@
 <h2>Notifications</h2>
 <div>
-<% if !@notes.nil? %>
+<% if @notes.length!=0 %>
     <table>
     <% @notes.each do|n| %>
         <tr>

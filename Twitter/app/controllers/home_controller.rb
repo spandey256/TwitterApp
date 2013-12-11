@@ -16,7 +16,7 @@ class HomeController < ApplicationController
     search.append current_user.id
 
     @tweet_list= UserTweet.where(:user_id => search).order("created_at DESC").paginate(:page => params[:page],:per_page => 10)
-    @page+=1
+
 
   end
 
