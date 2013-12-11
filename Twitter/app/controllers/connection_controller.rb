@@ -22,18 +22,28 @@ class ConnectionController < ApplicationController
     end
 
 
-    connection=Connection.find_by_following_id_and_follower_id user.id, current_user.id
+    connection=Connection.find_by_following_id_and_follower_id  current_user.id, user.id
     if connection.nil?
+      n=Notification.find_by_to_id_and_from_id_and_note_type(current_user.id, user.id, "request")
+      if n.nil?
+        redirect_to notification_index_path
+        return
+      end
 
       connection=Connection.new
-      connection.follower=current_user
-      connection.following=user
+      connection.follower=user
+      connection.following=current_user
       connection.save
-      redirect_to connection_index_path
+
+      n.from=current_user
+      n.to=user
+      n.note_type="accept"
+      n.save
+      redirect_to notification_index_path
       return
     end
 
-    flash[:notice]="already following!"
+    flash[:notice]="already a follower!"
     redirect_to connection_index_path
 
   end

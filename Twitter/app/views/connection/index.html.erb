@@ -9,7 +9,7 @@
   <tr>
     <% user=f.following %>
     <td><%= user.name %></td>
-    <td><%= user.email %></td>
+    <td><a href="<%= profile_index_path %>?user_id=<%= user.id %>"> <%= user.email %></a></td>
     <td><%= form_tag(connection_path(current_user.id), method: "put") do %>
           <%= hidden_field_tag(:user_id, user.id) %>
           <%= submit_tag("UnFollow") %>
@@ -19,8 +19,9 @@
   <% end %>
 </table>
 <div>
-  <%= form_tag(connection_index_path, :method => "post") do %>
+  <%= form_tag(notification_index_path, :method => "post") do %>
       <%= label_tag(:label, "username: ") %>
+      <%= hidden_field_tag(:type, "request") %>
       <%= text_field_tag(:email) %>
       <%= submit_tag("Add") %>
   <% end %>
@@ -41,7 +42,7 @@
         <tr>
           <% user=f.follower %>
           <td><%= user.name %></td>
-          <td><%= user.email %></td>
+          <td><a href="<%= profile_index_path %>?user_id=<%= user.id %>"> <%= user.email %></a></td>
           <td><%= user.created_at %></td>
 
         </tr>

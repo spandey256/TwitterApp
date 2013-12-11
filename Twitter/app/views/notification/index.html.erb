@@ -1,0 +1,45 @@
+<h2>Notifications</h2>
+<div>
+<% if !@notes.nil? %>
+    <table>
+    <% @notes.each do|n| %>
+        <tr>
+          <% if n.note_type=="request" %>
+              <td>
+                User <%= n.from.email %> has requested to follow you.
+                </td>
+              <td>
+              <%= form_tag(connection_index_path, method: "post") do %>
+                <%= hidden_field_tag(:email, n.from.email) %>
+                  <%= submit_tag("Accept", name: "type") %>
+                <% end %>
+              </td>
+                <td>
+                  <%= form_tag(notification_index_path, method: "post") do %>
+                      <%= hidden_field_tag(:email, n.from.email) %>
+                      <%= submit_tag("Decline", name: "type") %>
+
+                      <% end %>
+                </td>
+          <% elsif n.note_type=="decline" %>
+            <td>
+              User <%= n.from.email %> has declined your request.
+            </td>
+          <% elsif n.note_type=="accept" %>
+              <td>
+                User <%= n.from.email %> has accepted your request.
+              </td>
+
+          <% end %>
+        </tr>
+
+
+    <% end %>
+    </table>
+
+    <% else %>
+  <p> No Notifications</p>
+<% end %>
+
+</div>
+

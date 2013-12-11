@@ -3,20 +3,34 @@
   <table>
     <tr>
       <td>Name: </td>
-      <td><%= current_user.name %> </td>
+      <td><%= @user.name %> </td>
     </tr>
     <tr>
       <td>Email: </td>
-      <td><%= current_user.email %> </td>
+      <td><%= @user.email %> </td>
     </tr>
     <tr>
       <td>Mobile: </td>
-      <td><%= current_user.mobile %> </td>
+      <td><%= @user.mobile %> </td>
     </tr>
 
   </table>
 
 </div>
+<% if user_signed_in? %>
 <div>
-  <%= link_to "Edit", new_profile_path %>
+  <% if current_user.id==@user.id %>
+    <%= link_to "Edit", new_profile_path %>
+  <% elsif Connection.find_by_following_id_and_follower_id(@user.id, current_user.id).nil? %>
+      <%= form_tag(connection_index_path, :method => "post") do %>
+          <%= hidden_field_tag(:email, @user.email) %>
+          <%= submit_tag("Add") %>
+      <% end %>
+   <% else %>
+      <%= form_tag(connection_path(current_user.id), method: "put") do %>
+          <%= hidden_field_tag(:user_id, @user.id) %>
+          <%= submit_tag("UnFollow") %>
+      <% end %>
+  <% end %>
 </div>
+<% end %>

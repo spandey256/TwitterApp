@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210072912) do
+ActiveRecord::Schema.define(:version => 20131211064036) do
 
   create_table "connections", :force => true do |t|
     t.integer  "follower_id"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(:version => 20131210072912) do
 
   add_index "connections", ["follower_id"], :name => "index_connections_on_follower_id"
   add_index "connections", ["following_id"], :name => "index_connections_on_following_id"
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "to_id"
+    t.integer  "from_id"
+    t.string   "note_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "notifications", ["from_id"], :name => "index_notifications_on_from_id"
+  add_index "notifications", ["to_id"], :name => "index_notifications_on_to_id"
 
   create_table "user_tweets", :force => true do |t|
     t.string   "tweet"

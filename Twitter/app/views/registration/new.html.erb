@@ -4,17 +4,17 @@
 
 
   <div><label for="user_email">Email</label><br />
-    <input autofocus="autofocus" id="user_email" name="email" size="30" type="email" value="" /></div>
+    <input autofocus="autofocus" id="user_email" name="user[email]" size="30" type="email" value="" /><span><%= resource.errors[:email][0] %></span></div>
   <div><label for="user_name">Name</label><br />
-    <input id="user_name" name="name" size="30" type="text" /></div>
+    <input id="user_name" name="user[name]" size="30" type="text" /><span><%= resource.errors[:name][0] %></span></div>
   <div><label for="user_mobile">Mobile</label><br />
-    <input id="user_mobile" name="mobile" size="30" type="text" /></div>
+    <input id="user_mobile" name="user[mobile]" size="30" type="text" /><span><%= resource.errors[:mobile][0] %></span></div>
 
   <div><label for="user_password">Password</label><br />
-    <input id="user_password" name="password" size="30" type="password" /></div>
+    <input id="user_password" name="user[password]" size="30" type="password" /><span><%= resource.errors[:password][0] %></span></div>
 
   <div><label for="user_password_confirmation">Password confirmation</label><br />
-    <input id="user_password_confirmation" name="password_confirmation" size="30" type="password" /></div>
+    <input id="user_password_confirmation" name="user[password_confirmation]" size="30" type="password" /><span><%= resource.errors[:password_confirmation][0] %></span></div>
 
   <div><input name="commit" type="submit" value="Sign up" /></div>
 </form>
