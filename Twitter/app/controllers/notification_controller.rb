@@ -6,6 +6,7 @@ class NotificationController < ApplicationController
 
   def create
     user=User.find_by_email params[:email]
+
     if user.nil?
       flash[:notice]="username not found!"
       redirect_to connection_index_path
@@ -24,11 +25,8 @@ class NotificationController < ApplicationController
         redirect_to connection_index_path
         return
       end
-      n=Notification.new
-      n.to=user
-      n.from=current_user
-      n.note_type="request"
-      n.save
+      n=Notification.create! to: user, from: current_user, note_type: "request"
+
       flash[:notice]="Request sent!"
       redirect_to connection_index_path
     elsif params[:type]=="Decline"
@@ -42,9 +40,8 @@ class NotificationController < ApplicationController
       n.from=current_user
       n.note_type="decline"
       n.save
-      redirect_to notification_index_path
-
     end
-
+    redirect_to notification_index_path
   end
+
 end

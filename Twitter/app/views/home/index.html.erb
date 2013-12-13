@@ -1,46 +1,39 @@
-<% if user_signed_in? %>
+<div>
+  <%= form_tag(home_index_path, method: "post") do %>
+      <%= label_tag(:label, "Tweet") %>
+      <%= text_field_tag(:tweet) %>
+      <%= submit_tag("Post") %>
+  <% end %>
+</div>
 
-
+<% if flash[:status]!=nil %>
     <div>
-      <%= form_tag(home_index_path, method: "post") do %>
-          <%= label_tag(:label, "Tweet") %>
-          <%= text_field_tag(:tweet) %>
-          <%= submit_tag("Post") %>
-      <% end %>
+      <p><%= flash[:status] %></p>
     </div>
-
-    <% if @status!=nil %>
-        <div>
-          <p><%= @status %></p>
-        </div>
-    <% end %>
-    <div>
-      <p>Recent Tweets</p>
-      <table border="1">
-        <tr>
-          <th>Username</th>
-          <th>Tweet</th>
-          <th>time</th>
-        </tr>
-
-        <% @tweet_list.each do |tweet| %>
-        <tr>
-          <td> <%= (User.find tweet.user_id).email %> </td>
-          <td> <%= tweet.tweet %> </td>
-          <td> <%= tweet.created_at %> </td>
-        </tr>
-         <% end %>
-
-
-      </table>
-      <% if @tweet_list.length==0 %>
-        <p>No more Tweets</p>
-      <% end %>
-      <%= will_paginate @tweet_list %>
-
-
-    </div>
-
-
-
 <% end %>
+<div>
+  <p>Recent Tweets</p>
+  <table border="1">
+    <tr>
+      <th>Username</th>
+      <th>Tweet</th>
+      <th>time</th>
+    </tr>
+
+    <% @tweet_list.each do |tweet| %>
+    <tr>
+      <td> <%= (User.find tweet.user_id).email %> </td>
+      <td> <%= tweet.tweet %> </td>
+      <td> <%= tweet.created_at %> </td>
+    </tr>
+     <% end %>
+
+
+  </table>
+  <% if @tweet_list.length==0 %>
+    <p>No more Tweets</p>
+  <% end %>
+  <%= will_paginate @tweet_list %>
+
+
+</div>
